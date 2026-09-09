@@ -80,7 +80,10 @@ def test_gemini_connection():
         
         # Check if the required video-capable model is available
         model_names = [m.name for m in models]
-        has_flash = any('gemini-2.5-flash' in name for name in model_names)
+        has_flash = any(
+            name.rsplit("/", 1)[-1] == "gemini-2.5-flash"
+            for name in model_names
+        )
         if has_flash:
             print("✅ Gemini 2.5 Flash model is available")
             return True
