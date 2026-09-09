@@ -58,7 +58,7 @@ class VideoProcessor:
         """Generate response based on video content and user prompt"""
         try:
             response = self.client.models.generate_content(
-                model='gemini-1.5-pro',
+                model='gemini-2.5-flash',
                 contents=[video_file, prompt]
             )
             return response.text
