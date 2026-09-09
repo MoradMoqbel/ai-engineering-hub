@@ -78,15 +78,16 @@ def test_gemini_connection():
         models = list(client.models.list()) # Use client.models.list()
         print(f"✅ Connected to Gemini API - {len(models)} models available")
         
-        # Check if the required model is available
+        # Check if the required video-capable model is available
         model_names = [m.name for m in models]
-        if 'models/gemini-1.5-pro' in model_names:
-            print("✅ Gemini 1.5 Pro model is available")
+        has_flash = any('gemini-2.5-flash' in name for name in model_names)
+        if has_flash:
+            print("✅ Gemini 2.5 Flash model is available")
+            return True
         else:
-            print("⚠️  Gemini 1.5 Pro model not found in available models")
+            print("❌ Gemini 2.5 Flash model not found in available models")
             print("   Available models:", [m.name for m in models[:3]])
-        
-        return True
+            return False
         
     except Exception as e:
         print(f"❌ Failed to connect to Gemini API: {e}")
