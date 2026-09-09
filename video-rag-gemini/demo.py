@@ -24,7 +24,7 @@ def demo_video_chat():
     client = genai.Client(api_key=api_key)
     
     # Define model name
-    MODEL_NAME = 'gemini-1.5-pro'
+    MODEL_NAME = 'gemini-2.5-flash'
     
     print("🎬 Video RAG Demo")
     print("===============")
