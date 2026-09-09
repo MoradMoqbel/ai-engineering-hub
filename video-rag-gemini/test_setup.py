@@ -19,10 +19,11 @@ def test_imports():
         return False
     
     try:
-        import google.generativeai as genai
-        print(f"✅ Google GenerativeAI: {genai.__version__}")
+        # Modern import for Google Generative AI
+        from google import genai
+        print(f"✅ Google GenerativeAI (modern): {genai.__version__}")
     except ImportError:
-        print("❌ Google GenerativeAI not installed. Run: pip install google-generativeai")
+        print("❌ Google GenerativeAI (modern) not installed. Run: pip install google-genai")
         return False
     
     try:
@@ -68,11 +69,13 @@ def test_gemini_connection():
         return False
     
     try:
-        import google.generativeai as genai
-        genai.configure(api_key=api_key)
+        # Modern import for Google Generative AI
+        from google import genai
+        # Initialize the client
+        client = genai.Client(api_key=api_key)
         
         # Try to list models to test connection
-        models = list(genai.list_models())
+        models = list(client.models.list()) # Use client.models.list()
         print(f"✅ Connected to Gemini API - {len(models)} models available")
         
         # Check if the required model is available
@@ -120,4 +123,3 @@ def main():
 if __name__ == "__main__":
     success = main()
     sys.exit(0 if success else 1)
-
